@@ -1,0 +1,32 @@
+<li class="flex justify-evenly p-5 m-2 border">
+  <div class="m-auto">
+    <img src="{{book.src}}" alt="{{book.name}}" width="100px" />
+  </div>
+  <div class="description flex-row m-10 justify-center items-center">
+    <div class="mb-5">
+      <p class="text-center">
+        {{book.name | titlecase}} by {{book.author | titlecase}}
+      </p>
+      <p class="pt-5 text-center">
+        {{book.amount |currency:'PLN '}}
+      </p>
+    </div>
+
+    <div class="flex justify-center">
+      <button
+        class="py-3 px-2 bg-yellow-500 rounded hover:bg-yellow-700"
+        *ngIf="!isInCart"
+        (click)="addToCard()"
+      >
+        Add to Card
+      </button>
+      <button
+        class="py-3 px-2 bg-orange-500 rounded hover:bg-yellow-700"
+        *ngIf="isInCart"
+        (click)="removeFromCart()"
+      >
+        Remove from Cart
+      </button>
+    </div>
+  </div>
+</li>

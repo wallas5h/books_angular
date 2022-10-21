@@ -1,0 +1,16 @@
+<h2 class="w-full inline-block text-center text-4xl mb-10">Books List!</h2>
+<!-- 
+<button (click)="isShowing=!isShowing">
+  <ng-container *ngIf="!isShowing">Show Books</ng-container>
+  <ng-container *ngIf="isShowing">Hide Books</ng-container>
+</button> -->
+<br />
+<ul class="flex justify-evenly items-center flex-wrap w-full">
+  <ng-container *ngFor="let singleBook of books; let i=index">
+    <app-book
+      (emitBook)="addToCart($event)"
+      [book]="singleBook"
+      [index]="i"
+    ></app-book>
+  </ng-container>
+</ul>

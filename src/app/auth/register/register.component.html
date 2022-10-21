@@ -1,0 +1,87 @@
+<div class="flex h-screen justify-center">
+  <form
+    (ngSubmit)="onSubmit()"
+    class="p-4 rounded-lg border m-auto"
+    #myForm="ngForm"
+  >
+    <h1 class="text-center text-2xl">Register</h1>
+    <div class="my-5">
+      <label for="email">Email</label>
+      <input
+        class="p-2 rounded w-full border"
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Enter email"
+        required
+        pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$"
+        [(ngModel)]="form.email"
+        #email="ngModel"
+      />
+    </div>
+    <div
+      *ngIf="email.invalid && (email.dirty || email.touched)"
+      class="p-2 text-red-800"
+    >
+      <div *ngIf="email.errors?.['required']">
+        Email is required.
+      </div>
+      <div *ngIf="email.errors?.['pattern']">
+        Invalid email pattern
+      </div>
+    </div>
+    <div class="my-5">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        class="p-2 rounded w-full border"
+        placeholder="Enter password"
+        [(ngModel)]="form.password"
+        #password="ngModel"
+        required
+        minlength="6"
+      />
+    </div>
+    <div
+      *ngIf="password.invalid && (password.dirty || password.touched)"
+      class="p-2 my-2 text-red-800"
+    >
+      <div *ngIf="password.errors?.['required']">
+        Password is required.
+      </div>
+      <div *ngIf="password.errors?.['minlength']">
+        Password must be at least 6 characters long.
+      </div>
+    </div>
+    <div class="my-5">
+      <label for="confirm">Confirm password</label>
+      <input
+        type="password"
+        name="confirm"
+        id="confirm"
+        class="p-2 rounded w-full border"
+        placeholder="Confirm password"
+        [(ngModel)]="form.confirm_password"
+        #confirm_password="ngModel"
+      />
+    </div>
+
+    <div *ngIf="!passwordMatch" class="p-2 my-2 text-red-800">
+      Passwords are not match.
+    </div>
+
+    <div>
+      <button
+        class="p-2 w-full bg-orange-600 text-white rounded hover:bg-green-600 cursor-pointer"
+        type="submit"
+        value="Submit"
+        [disabled]="myForm.form.invalid"
+      >
+        <ng-container *ngIf="isLoading()">Loading...</ng-container>
+        <ng-container *ngIf="!isLoading()">Submit</ng-container>
+      </button>
+    </div>
+  </form>
+</div>
